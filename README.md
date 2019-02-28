@@ -1,11 +1,8 @@
 # Título del trabajo
-
-Descripción breve del proyecto a realizar (2-3 frases).
-
+Servomotor controlado por control mental.
 ## Integrantes del equipo
-
-Nombres, apellidos, y usuario GitHub de los integrantes del equipo.
-
+1. Alejandro del Moral Lapresta, alejandrodelmoral.
+2. Hugo Lopez Janquin, hugolopezjanquin.
+3. Jacob Sánchez Moreira, jacobsanchezmoreira.
 ## Objetivos del trabajo
-
-Lista de los objetivos que se persiguen con el trabajo propuesto.
+Controlar un servomotor mediante un sensor EEG (electroencefalografía).
