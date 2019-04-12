@@ -1,0 +1,6 @@
+1- Función que calcula la media de los valores medidos por el sensor, así como el máximo y el mínimo alcanzado,
+además registra el tiempo en el momento que se alcanzó.
+
+2- Función que distribuye en pequeños intervalos los valores obtenidos por el sensor y determina la acción a realizar en cada caso.
+
+3- Función que crea y modifica un fichero dónde se van guardando los valores obtenidos para su posterior visualización.
