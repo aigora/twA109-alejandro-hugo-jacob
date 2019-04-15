@@ -1,0 +1,128 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// prototipos de las funcoines
+
+FILE *fd;	//para el archivo de texto
+
+int main(void) {
+	
+	int pulsador;
+	float v,max,min,media;
+	
+	pulsador=getchar();
+	
+	if(pulsador=='1'){
+		///////////////////////		Leer sensor
+		///////////////////////		llamar a funcion intervalo
+		//////////////////////////  llamar a funcion archivotexto
+		/////////////////////		llamar a calculo de media ...
+		fclose(fd);	//Se cierra el archivo de texto
+	}
+	
+	if(pulsador=='0'){
+		//Se apaga el sensor
+	}
+	
+	if(pulsador=='s'){
+		//Se sale del progrma   un return o algo
+	}
+	
+	system("pause");
+	return 0;
+}
+
+/*	=============================================================	FUNCIONES	==============================================	*/
+
+// Funcion leer sensor
+
+int intervalo(int w /*Lectura sensor*/){
+	
+	char r,lectura,a,b,c,d,e;
+	
+	if(lectura>=0 && lectura<50){
+		//funcion lectura sensor
+	}
+	
+	else{
+		if(lectura>=50 && lectura<60)
+			lectura=a;
+		if(lectura>=60 && lectura<70)
+			lectura=b;
+		if(lectura>=70 && lectura<80)
+			lectura=c;
+		if(lectura>=80 && lectura<90)
+			lectura=d;
+		if(lectura>=90 && lectura<=100)
+			lectura=e;
+	}
+	
+	switch(lectura){
+		case 'a':{
+			//led y servo
+			break;
+		}
+		case 'b':{
+			//led y servo
+			break;
+		}
+		case 'c':{
+			//led y servo
+			break;
+		}
+		case 'd':{
+			//led y servo
+			break;
+		}
+		case 'e':{
+			//led y servo
+			break;
+		}
+	}
+	
+	return r;
+}
+
+
+
+
+void archivotexto(void){
+	
+	fd=fopen("Lecturas sensor","w");	//Se abre el archivo
+		if (fd==NULL){
+			printf("No se pudo crear el archivo");
+			return;
+		}
+		else{
+			fprintf(fd,"%d ",/*lecturas numericas del sensor*/);	//Imprime en el archivo las lecturas numericas del sensor
+		}
+	return;		//Se cierra desde el main
+}
+
+
+
+float calculo_media_y_max_min (float _v[], int _dim, float *max, float *min){		//Guardar antes los valores del sensor en un vector
+	
+	float valor_medio,sum=0;
+	int i;
+	
+	*max=_v[0];
+	*min=_v[0];
+	for(i=0;i<_dim;i++){
+		sum+=_v[i];
+		if(_v[i]>*max)
+			*max=_v[i];
+		else
+			if(_v[i]<*min)
+				*min=_v[i];
+	}
+
+	valor_medio=sum/_dim;
+	return valor_medio;
+}
+
+
+
+
+
+
