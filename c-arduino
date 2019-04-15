@@ -40,6 +40,8 @@ void autoConnect(SerialPort *arduino,char *incomingData) {
 		printf ("Conectado con Arduino en el puerto %s\n",arduino->portName);
 	}
 		
+		
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: Desde c para encender o apagar la lectura del sensor
 	// Bucle de la aplicación
 	printf ("0 - apagar, 1 - encender, s - SALIR");
 	while (isConnected(arduino) && sendData!='s')   {
