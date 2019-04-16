@@ -1,7 +1,10 @@
+#include <Servo.h>
 #define N 300
 
+Servo myservo;
+
 const int LedPin = 13;
-int valor;
+const int Potenciometro = A0;
 
 //prototipos de las funciones
 
@@ -12,6 +15,7 @@ void setup(){
   Serial.begin(9600);
   pinMode(LedPin, OUTPUT);
   digitalWrite(LedPin, LOW);
+  myservo.attach(9);
 }
  
 void loop(){
@@ -29,10 +33,16 @@ void loop(){
      
     if (dato  == '2'){
       for(i=0;i<N;i++){
-        valor=analogRead(A0);
+        valor=analogRead(Potenciometro);
         v[i]=valor;
         intervalo(valor);
       }
+      
+    Serial.println("El vector guardado es:  ");	//imprime el vector por pantalla
+    for(i=0;i<N;i++){
+      Serial.println(v[i]);
+    }
+    
       media=calculo_media_y_max_min(v,dim,&max,&min);
       Serial.print("La media es:  ");
       Serial.println(media);
@@ -40,37 +50,56 @@ void loop(){
       Serial.println(max);
       Serial.print("El min es:  ");
       Serial.println(min);
+      delay(5000);
     }
   }
 }
 
 /*	=============================================================	FUNCIONES	==============================================	*/
 
-// Funcion leer sensor
-
 void intervalo(int valor){
   
-  if(valor>=0 && valor<50)
-    Serial.println("Entre 0 y 50");
+  if(valor>=0 && valor<500)
+    Serial.println("Entre 0 y 500");
   
-  else{                                 //falta añadir los servos
-    if(valor>=500 && valor<600)
+  else{
+    if(valor>=500 && valor<600){
       digitalWrite(LedPin, HIGH);
-    if(valor>=600 && valor<700)
+      valor = map(valor, 0, 1023, 0, 180);     // mapeo para poner al servo entre 0 y180
+      myservo.write(valor);                  // lo mueve a esa posicion
+      delay(15);
+    }
+    if(valor>=600 && valor<700){
       digitalWrite(LedPin, LOW);
-    if(valor>=700 && valor<800)
+      valor = map(valor, 0, 1023, 0, 180);
+      myservo.write(valor);
+      delay(15);
+    }
+    if(valor>=700 && valor<800){
       digitalWrite(LedPin, HIGH);
-    if(valor>=800 && valor<900)
+      valor = map(valor, 0, 1023, 0, 180);
+      myservo.write(valor);
+      delay(15);
+    }
+    if(valor>=800 && valor<900){
       digitalWrite(LedPin, LOW);
-    if(valor>=900 && valor<=1024)
+      valor = map(valor, 0, 1023, 0, 180);
+      myservo.write(valor);
+      delay(15);
+    }
+    if(valor>=900 && valor<=1023){
       digitalWrite(LedPin, HIGH);
-    Serial.println(valor);
+      valor = map(valor, 0, 1023, 0, 180);
+      myservo.write(valor);
+      delay(15);
+    }
+   // Serial.println(valor);
   }
 }
 
 
 
-float calculo_media_y_max_min (float _v[], int _dim, float *max, float *min){		//Guardar antes los valores del sensor en un vector
+float calculo_media_y_max_min (float _v[], int _dim, float *max, float *min){
 	
 	float valor_medio,sum=0;
 	int i;
