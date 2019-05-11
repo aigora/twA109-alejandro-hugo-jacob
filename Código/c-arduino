@@ -28,6 +28,8 @@ int main(void) {
 	
 void autoConnect(SerialPort *arduino,char *incomingData) {
 	char sendData = 0;
+	int readResult;
+	FILE *fd;	//puntero para el archivo de texto
 	
 	// Espera la conexión con Arduino
 	while (!isConnected(arduino))   {
@@ -40,17 +42,26 @@ void autoConnect(SerialPort *arduino,char *incomingData) {
 		printf ("Conectado con Arduino en el puerto %s\n",arduino->portName);
 	}
 		
-		
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: Desde c para encender o apagar la lectura del sensor
+/*===========================================================================================================================*/
 	// Bucle de la aplicación
-	printf ("0 - apagar, 1 - encender, s - SALIR");
-	while (isConnected(arduino) && sendData!='s')   {
-		sendData = getch();
-		writeSerialPort(arduino,&sendData, sizeof(char));
+	fd=fopen("Datos.txt","w+");
+	if(fd==NULL)
+		printf("ERROR\n");
+	else{
+		while (isConnected(arduino))   {
+				readResult = readSerialPort(arduino,incomingData, MAX_DATA_LENGTH);
+				if (readResult!=0){						//si lee algo
+					printf("%s", incomingData);			//imprime por pantalla los datos recibidos del arduino
+					fprintf(fd,"%s ", incomingData);	//guarda lo recibido en un archivo txt
+					Sleep(1000);	//para evitar errores de lectura se impone una espera de 1 segundo para que no lea mas rápido de lo que arduino manda por el puerto
+				}
+		}
 	}
-	
-	if (!isConnected(arduino))
+	if (!isConnected(arduino)){
+		fclose(fd);		//se cierra el fichero una vez que arduino no esta conectado
 		printf ("Se ha perdido la conexión con Arduino\n");
+		return;
+	}
 }
 
 
