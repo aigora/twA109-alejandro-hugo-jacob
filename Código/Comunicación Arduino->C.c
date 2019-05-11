@@ -48,13 +48,13 @@ void autoConnect(SerialPort *arduino,char *incomingData) {
 	if(fd==NULL)
 		printf("ERROR\n");
 	else{
-		while (isConnected(arduino))   {
-				readResult = readSerialPort(arduino,incomingData, MAX_DATA_LENGTH);
-				if (readResult!=0){						//si lee algo
-					printf("%s", incomingData);			//imprime por pantalla los datos recibidos del arduino
-					fprintf(fd,"%s ", incomingData);	//guarda lo recibido en un archivo txt
-					Sleep(1000);	//para evitar errores de lectura se impone una espera de 1 segundo para que no lea mas rápido de lo que arduino manda por el puerto
-				}
+		while (isConnected(arduino)){
+			readResult = readSerialPort(arduino,incomingData, MAX_DATA_LENGTH);
+			if (readResult!=0){						//si lee algo
+				printf("%s", incomingData);			//imprime por pantalla los datos recibidos del arduino
+				fprintf(fd,"%s ", incomingData);	//guarda lo recibido en un archivo txt
+				Sleep(1000);	//para evitar errores de lectura se impone una espera de 1 segundo para que no lea mas rápido de lo que arduino manda por el puerto
+			}
 		}
 	}
 	if (!isConnected(arduino)){
