@@ -25,14 +25,6 @@ This project was formerly "Arduino-Brain-Library" on GitHub, but was renamed to 
 ### SOFTWARE SERIAL
 Past versions of this library relied on a separate branch implementing support for NewSoftSerial. Improvements to both the bundled SoftwareSerial library and the underlying class hierarchy in Arduino 1.0 has allowed a single version of the Brain library to cover both use cases. Please **do not use** the old [softserial](https://github.com/kitschpatrol/Brain/tree/softserial) branch of this library! Please see
 
-
-### EXAMPLES
-Three examples are provided with the library:
-
-- `BrainBlinker.ino` blinks an LED faster as your "attention" value increases.
-- `BrainSerialTest.ino` prints out a CSV of brain data over serial.
-- `BrainSoftSerialTest.ino` reads brain data over SoftwareSerial and prints a CSV over hardware serial. 
-
 ### INSTALLATION
 There are two ways to install the library:
 
